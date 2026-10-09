@@ -1,3 +1,5 @@
+from app.data.vagas_mock import VAGAS_MOCK
+
 class Vaga:
     TIPO_VAGA = "Indefinido"
 
@@ -44,7 +46,7 @@ class Vaga:
     def resumo_beneficios(self):
         return f"Bolsa: R$ {self._bolsa:.2f}"
 
-    def para_dicionario(self):
+    def detalhes(self):
         return {
             "id": self.mostrar_id(),
             "titulo": self.mostrar_titulo(),
@@ -87,12 +89,11 @@ class VagaPresencial(Vaga):
         base = super().resumo_beneficios()
         return f"{base} + VT: R$ {self._vale_transporte:.2f}"
 
-    def para_dicionario(self):
-        dicionario = super().para_dicionario()
-        dicionario["local"] = self.mostrar_local()
-        dicionario["vale_transporte"] = self.mostrar_vale_transporte()
-        return dicionario
-
+    def detalhes(self):
+        d = super().detalhes()
+        d["local"] = self.mostrar_local()
+        d["vale_transporte"] = self.mostrar_vale_transporte()
+        return d
 
 class VagaRemota(Vaga):
     TIPO_VAGA = "Remota"
@@ -113,20 +114,19 @@ class VagaRemota(Vaga):
         base = super().resumo_beneficios()
         return f"{base} + Auxílio Internet: R$ {self._auxilio_internet:.2f}"
 
-    def para_dicionario(self):
-        dicionario = super().para_dicionario()
-        dicionario["auxilio_internet"] = self.mostrar_auxilio_internet()
-        return dicionario
-
+    def detalhes(self):
+        d = super().detalhes()
+        d["auxilio_internet"] = self.mostrar_auxilio_internet()
+        return d
 
 TIPOS_VAGA = {
     "presencial": VagaPresencial,
     "remota": VagaRemota
 }
 
-def carregar_vagas(dados_mock):
+def carregar_vagas():
     vagas = []
-    for dado in dados_mock:
+    for dado in VAGAS_MOCK:
         dado_copia = dado.copy()
         tipo = dado_copia.pop("tipo")
         classe_vaga = TIPOS_VAGA[tipo.lower()]
