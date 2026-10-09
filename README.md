@@ -95,6 +95,8 @@ classDiagram
 
 ## Quem fez o quê
 
-- **Aluno 1**: Estruturação do projeto, models e `verificar.py`
-- **Aluno 2**: Controladores, rotas FastAPI e `README.md` com diagrama
+- **Aluno 1**: Estruturação do projeto
+- **Aluno 2**: Models e `verificar.py`
+- **Aluno 2**: Controladores, rotas FastAPI
+- **Aluno 4**: `README.md` com diagrama
 
